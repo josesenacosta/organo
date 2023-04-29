@@ -1,4 +1,15 @@
 import './Campo.css';
+import React from 'react';
+
+
+interface CampoProps {
+  aoAlterado: (valor: string) => void;
+  type?: string;
+  label: string;
+  placeholder: string;
+  valor: string;
+  obrigatorio: boolean;
+}
 
 const Campo = ({
   type = 'text',
@@ -7,8 +18,10 @@ const Campo = ({
   valor,
   aoAlterado,
   obrigatorio = false,
-}) => {
-  const aoDigitado = (evento) => {
+}: CampoProps) => {
+
+
+  const aoDigitado = (evento: React.ChangeEvent<HTMLInputElement>) => {
     aoAlterado(evento.target.value);
   };
 
