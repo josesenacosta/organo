@@ -61,7 +61,7 @@ const Formulario = (props) => {
           valor={time}
           aoAlterado={(valor) => setTime(valor)}
         />
-        <Botao texto="Criar Card" />
+        <Botao>Criar Card</Botao>
       </form>
 
       <form
@@ -86,7 +86,7 @@ const Formulario = (props) => {
           valor={corTime}
           aoAlterado={(valor) => setCorTime(valor)}
         />
-        <Botao texto="Criar Time" />
+        <Botao>Criar Time</Botao>
       </form>
     </section>
   );

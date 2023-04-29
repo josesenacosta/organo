@@ -81,7 +81,10 @@ function App() {
 
   return (
     <div className="App">
-      <Banner />
+      <Banner
+        enderecoImagem="/imagens/banner.png"
+        textoAlternativo="O banner principal da página do Organo"
+      />
       <Formulario
         aoColaboradorCadastrado={(colaborador) =>
           aoNovoColaboradorAdicionado(colaborador)
