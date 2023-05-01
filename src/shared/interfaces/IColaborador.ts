@@ -4,5 +4,5 @@ export interface IColaborador {
   imagem: string;
   time: string;
   id: string;
-  favorito: string;
+  favorito: boolean;
 }

@@ -4,8 +4,19 @@ import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { IColaborador } from '../../shared/interfaces/IColaborador';
+import { ITimes } from '../../shared/interfaces/ITimes';
 
-const Formulario = (props) => {
+interface FormularioProps {
+  aoColaboradorCadastrado: (colaborador: IColaborador) => void
+  times: string[]
+  cadastrarTime: (time: ITimes) => void
+  erro: string
+}
+
+
+
+const Formulario = (props: FormularioProps) => {
   const [nome, setNome] = useState('');
   const [cargo, setCargo] = useState('');
   const [imagem, setImagem] = useState('');
@@ -13,7 +24,7 @@ const Formulario = (props) => {
   const [nomeTime, setNomeTime] = useState('');
   const [corTime, setCorTime] = useState('');
 
-  const aoSalvar = (evento) => {
+  const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
     props.aoColaboradorCadastrado({
       nome,
