@@ -1,5 +1,14 @@
+import { IColaborador } from '../../shared/interfaces/IColaborador';
 import './Colaborador.css';
 import { AiFillCloseCircle, AiFillStar, AiOutlineStar } from 'react-icons/ai';
+
+interface ColaboradorProps {
+  colaborador: IColaborador;
+  imagem: string;
+  corDeFundo: string;
+  aoDeletar: (id: string) => void;
+  aoFavoritar: (id: string) => void;
+}
 
 const Colaborador = ({
   colaborador,
@@ -7,7 +16,7 @@ const Colaborador = ({
   corDeFundo,
   aoDeletar,
   aoFavoritar,
-}) => {
+}: ColaboradorProps) => {
   /* <<<---- Desestruturacao. ao inves de usar o props, utilizo diretamente os nomes das minhas propriedadeds do elemento <Colaborador/> */
 
   function favoritar() {

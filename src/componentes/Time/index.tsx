@@ -1,10 +1,26 @@
+import { IColaborador } from '../../shared/interfaces/IColaborador';
 import Colaborador from '../Colaborador';
 import './Time.css';
 import hexToRgba from 'hex-to-rgba';
 
-const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }) => {
+
+interface TimeProps {
+
+  colaboradores: IColaborador[];
+  aoDeletar: (id: string) => void;
+  mudarCor: (cor: string, id: string) => void;
+  aoFavoritar: (id: string) => void;
+  nome: string;
+  cor: string;
+  id: string;
+
+}
+
+
+const Time = ({ id, nome, cor, colaboradores, aoDeletar, mudarCor, aoFavoritar }: TimeProps) => {
+
   const css = {
-    backgroundColor: hexToRgba(time.cor, '0.6'),
+    backgroundColor: hexToRgba(cor, '0.6'),
     backgroundImage: 'url(../imagens/fundo.png)',
   };
 
@@ -15,11 +31,11 @@ const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }) => {
       <section className="time" style={css}>
         <input
           type="color"
-          value={time.cor}
-          onChange={(e) => mudarCor(e.target.value, time.id)}
+          value={cor}
+          onChange={(e) => mudarCor(e.target.value, id)}
           className="input-cor"
         />
-        <h3 style={{ borderColor: time.cor }}>{time.nome}</h3>
+        <h3 style={{ borderColor: cor }}>{nome}</h3>
         <div className="colaboradores">
           {colaboradores.map((colaborador) => {
             return (
@@ -27,7 +43,7 @@ const Time = ({ time, colaboradores, aoDeletar, mudarCor, aoFavoritar }) => {
                 key={colaborador.nome}
                 colaborador={colaborador}
                 imagem={colaborador.imagem}
-                corDeFundo={time.cor}
+                corDeFundo={cor}
                 aoDeletar={aoDeletar}
                 aoFavoritar={aoFavoritar}
               />

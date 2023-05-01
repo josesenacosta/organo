@@ -67,7 +67,8 @@ const Formulario = (props) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          props.cadastrarTime({ nome: nomeTime, cor: corTime });
+          props.cadastrarTime({ nome: nomeTime, cor: corTime, id: uuidv4() });
+          setNomeTime('');
         }}
       >
         <h2>Preencha os dados para criar um novo time</h2>
@@ -78,6 +79,7 @@ const Formulario = (props) => {
           valor={nomeTime}
           aoAlterado={(valor) => setNomeTime(valor)}
         />
+        {props.erro && <p>{props.erro}</p>}
         <Campo
           obrigatorio
           type="color"

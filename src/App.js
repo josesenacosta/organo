@@ -5,6 +5,8 @@ import Time from './componentes/Time';
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
+  const [erro, setErro] = useState(null);
+
   const [times, setTimes] = useState([
     {
       id: uuidv4(),
@@ -67,7 +69,12 @@ function App() {
   }
 
   function cadastrarTime(novoTime) {
-    setTimes([...times, { ...novoTime, id: uuidv4() }]);
+    if (times.some((time) => time.nome === novoTime.nome)) {
+      setErro(`Time ${novoTime.nome} já existe.`);
+    } else {
+      setTimes([...times, { ...novoTime }]);
+      setErro(null);
+    }
   }
 
   function resolverFavorito(id) {
@@ -86,6 +93,7 @@ function App() {
         textoAlternativo="O banner principal da página do Organo"
       />
       <Formulario
+        erro={erro}
         aoColaboradorCadastrado={(colaborador) =>
           aoNovoColaboradorAdicionado(colaborador)
         }
@@ -95,10 +103,9 @@ function App() {
       {times.map((time) => (
         <Time
           mudarCor={mudarCorDoTime}
-          key={time.nome}
-          time={time}
+          key={time.id}
+          id={time.id}
           nome={time.nome}
-          corPrimaria={time.corPrimaria}
           cor={time.cor}
           colaboradores={colaboradores.filter(
             (colaborador) => colaborador.time === time.nome,
