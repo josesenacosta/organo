@@ -3,11 +3,13 @@ import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 import { v4 as uuidv4 } from 'uuid';
+import { IColaborador } from './shared/interfaces/IColaborador';
+import { ITimes } from './shared/interfaces/ITimes';
 
 function App() {
-  const [erro, setErro] = useState(null);
+  const [erro, setErro] = useState('');
 
-  const [times, setTimes] = useState([
+  const [times, setTimes] = useState<ITimes[]>([
     {
       id: uuidv4(),
       nome: 'Programação',
@@ -45,19 +47,19 @@ function App() {
     },
   ]);
 
-  const [colaboradores, setColaboradores] = useState([]);
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>([]);
 
-  const aoNovoColaboradorAdicionado = (colaborador) => {
+  const aoNovoColaboradorAdicionado = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores, colaborador]);
   };
 
-  function deletarColaborador(id) {
+  function deletarColaborador(id: string) {
     setColaboradores(
       colaboradores.filter((colaborador) => colaborador.id !== id),
     );
   }
 
-  function mudarCorDoTime(cor, id) {
+  function mudarCorDoTime(cor: string, id: string) {
     setTimes(
       times.map((time) => {
         if (time.id === id) {
@@ -68,16 +70,16 @@ function App() {
     );
   }
 
-  function cadastrarTime(novoTime) {
+  function cadastrarTime(novoTime: ITimes) {
     if (times.some((time) => time.nome === novoTime.nome)) {
       setErro(`Time ${novoTime.nome} já existe.`);
     } else {
       setTimes([...times, { ...novoTime }]);
-      setErro(null);
+      setErro('');
     }
   }
 
-  function resolverFavorito(id) {
+  function resolverFavorito(id: string) {
     setColaboradores(
       colaboradores.map((colaborador) => {
         if (colaborador.id === id) colaborador.favorito = !colaborador.favorito;

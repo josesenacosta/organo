@@ -27,7 +27,7 @@ const Time = ({ id, nome, cor, colaboradores, aoDeletar, mudarCor, aoFavoritar }
   //Também pode ser colocado inline como atributo do section style={{ backgroundColor: time.cor }}
 
   return (
-    colaboradores.length > 0 && (
+    colaboradores.length > 0 ? (
       <section className="time" style={css}>
         <input
           type="color"
@@ -51,7 +51,7 @@ const Time = ({ id, nome, cor, colaboradores, aoDeletar, mudarCor, aoFavoritar }
           })}
         </div>
       </section>
-    )
+    ) : <></>
   );
 };
 
